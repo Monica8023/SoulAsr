@@ -1,0 +1,64 @@
+asr-test-platform/
+├── backend/                 # 后端 FastAPI 项目根目录
+│   ├── src/                 # 核心源码包
+│   │   ├── __init__.py
+│   │   ├── main.py          # 项目启动入口
+│   │   ├── api/             # 路由层：处理 HTTP 请求与响应
+│   │   │   ├── __init__.py
+│   │   │   ├── v1/          # API 版本控制（方便后续迭代）
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── models.py      # 模型管理相关接口（加载/卸载/健康检查）
+│   │   │   │   └── asr.py         # ASR 识别核心接口（单条/批量）
+│   │   │   └── deps.py            # 全局依赖注入（如数据库会话、鉴权等）
+│   │   ├── core/            # 核心配置与工具
+│   │   │   ├── __init__.py
+│   │   │   ├── config.py    # 环境变量与项目配置（端口、模型路径等）
+│   │   │   └── logging_config.py # 统一日志管理
+│   │   ├── services/        # 业务逻辑层：ASR 推理的核心大脑
+│   │   │   ├── __init__.py
+│   │   │   ├── model_manager.py   # 模型管理器（负责加载、释放、切换模型）
+│   │   │   ├── audio_processor.py # 音频预处理（VAD、格式转换、采样率调整）
+│   │   │   └── asr_service.py     # 调用具体模型引擎进行转写
+│   │   ├── engines/         # 推理引擎层：封装不同 ASR 模型的统一接口
+│   │   │   ├── __init__.py
+│   │   │   ├── base_engine.py     # 抽象基类（定义统一的 transcribe 方法）
+│   │   │   ├── whisper_engine.py  # Whisper 模型适配
+│   │   │   └── funasr_engine.py   # FunASR 模型适配
+│   │   ├── schemas/         # Pydantic 模型：定义接口的请求体与响应体
+│   │   │   ├── __init__.py
+│   │   │   ├── common.py    # 通用响应结构（如 code, message, data）
+│   │   │   ├── asr.py       # ASR 相关的输入输出数据结构
+│   │   │   └── metrics.py   # 性能指标数据结构（RTF、延迟等）
+│   │   └── utils/           # 通用工具函数
+│   │       ├── __init__.py
+│   │       └── file_ops.py  # 文件读写、临时文件清理等
+│   ├── tests/               # 单元测试与集成测试
+│   │   ├── __init__.py
+│   │   └── test_asr.py
+│   ├── .env                 # 本地环境变量（不提交到 Git）
+│   ├── requirements.txt     # Python 依赖清单
+│   └── Dockerfile           # 后端容器化部署文件
+│
+├── frontend/                # 前端项目根目录（建议使用 Vue3 或 React + Vite）
+│   ├── public/              # 静态资源
+│   ├── src/
+│   │   ├── assets/          # 样式、图片等
+│   │   ├── components/      # 公共组件（如上传按钮、音频播放器）
+│   │   ├── views/           # 页面视图
+│   │   │   ├── Debug.vue    # 调试页面（上传音频、展示结果）
+│   │   │   └── ModelManager.vue # 模型管理页面（切换、监控状态）
+│   │   ├── router/          # 路由配置
+│   │   ├── store/           # 状态管理（Pinia/Vuex）
+│   │   ├── api/             # 封装后端的 Axios/Fetch 请求
+│   │   └── App.vue
+│   ├── package.json         # 前端依赖管理
+│   └── vite.config.js       # Vite 构建配置
+│
+├── docker-compose.yml       # 一键编排前后端及依赖服务（可选）
+└── README.md                # 项目说明文档
+
+
+后端 backend/src/engines/：这是为了应对你“支持模型切换”的需求。通过定义一个 base_engine.py 抽象基类，强制要求所有接入的模型（Whisper, FunASR 等）都必须实现标准的 transcribe() 方法。这样在 services/asr_service.py 中，你就可以无感地切换底层模型，代码解耦非常彻底。
+后端 backend/src/services/model_manager.py：专门负责模型的加载与释放。你可以在这里维护一个全局的模型字典或单例，结合 FastAPI 的生命周期事件（startup/shutdown），实现对显存/内存资源的精细化控制。
+前端 frontend/src/api/：将所有后端接口调用集中在这里管理。当后端接口地址或参数发生变化时，你只需要修改这一个文件夹里的代码，不需要去每个 Vue/React 组件里翻找。
+前后端完全分离：前端只负责 UI 交互和数据展示，所有的音频处理、模型推理、指标计算全部放在后端完成。这种架构下，未来如果你想把前端换成小程序或者桌面端应用，后端几乎不需要做任何改动。

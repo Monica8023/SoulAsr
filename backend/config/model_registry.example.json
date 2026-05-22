@@ -1,0 +1,53 @@
+{
+  "models": {
+    "paraformer": {
+      "engine": "paraformer",
+      "path": "D:/models/paraformer",
+      "device": "auto",
+      "enabled": false,
+      "auto_load": false,
+      "options": {}
+    },
+    "qwen3-asr": {
+      "engine": "qwen3-asr",
+      "path": "D:/models/qwen3-asr",
+      "device": "auto",
+      "enabled": false,
+      "auto_load": false,
+      "options": {}
+    },
+    "zipformer": {
+      "engine": "zipformer",
+      "path": "D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30",
+      "device": "auto",
+      "enabled": true,
+      "auto_load": true,
+      "options": {
+        "encoder": "D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/encoder.int8.onnx",
+        "decoder": "D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/decoder.onnx",
+        "joiner": "D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/joiner.int8.onnx",
+        "tokens": "D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/tokens.txt",
+        "num_threads": 2,
+        "feature_dim": 80,
+        "sample_rate": 16000,
+        "provider": "cpu"
+      }
+    },
+    "whisper": {
+      "engine": "whisper",
+      "path": "D:/models/whisper",
+      "device": "auto",
+      "enabled": false,
+      "auto_load": false,
+      "options": {}
+    },
+    "funasr": {
+      "engine": "funasr",
+      "path": "D:/models/funasr",
+      "device": "auto",
+      "enabled": false,
+      "auto_load": false,
+      "options": {}
+    }
+  }
+}
