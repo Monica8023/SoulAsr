@@ -52,28 +52,6 @@ class TranscriptionResponse(BaseModel):
     metrics: AsrMetrics
 
 
-class BatchTranscriptionRequest(BaseModel):
-    audio_paths: list[str] = Field(default_factory=list)
-    model_name: str | None = Field(default=None, validation_alias=AliasChoices("model_name", "modelName"))
-    options: TranscriptionOptions = Field(default_factory=TranscriptionOptions)
-
-    @model_validator(mode="before")
-    @classmethod
-    def merge_batch_legacy_fields(cls, data):
-        if not isinstance(data, dict):
-            return data
-        options = dict(data.get("options") or {})
-        if "language" in data and "language" not in options:
-            options["language"] = data.get("language")
-        data["options"] = options
-        return data
-
-
-class BatchTranscriptionResponse(BaseModel):
-    items: list[TranscriptionResponse]
-    total: int
-
-
 class StreamStartRequest(BaseModel):
     type: str = Field(default="start")
     file_name: str = Field(validation_alias=AliasChoices("file_name", "fileName"))

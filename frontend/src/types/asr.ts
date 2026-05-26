@@ -44,25 +44,3 @@ export interface TaskMetrics {
   totalDurationMs: number;
   latencyMs: number;
 }
-
-export interface BatchTranscriptionRequest {
-  audio_paths: string[];
-  language?: string;
-  model_name?: string;
-}
-
-export interface BatchTranscriptionItem {
-  audio_path: string;
-  model_name: string;
-  text: string;
-  metrics: {
-    latency_ms: number;
-    rtf: number;
-    audio_seconds: number | null;
-  };
-}
-
-export interface BatchTranscriptionResponse {
-  items: BatchTranscriptionItem[];
-  total: number;
-}

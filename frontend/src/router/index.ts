@@ -17,14 +17,6 @@ const routes: RouteRecordRaw[] = [
       title: "ASR 调试工作台",
     },
   },
-  {
-    path: "/batch",
-    name: "batch",
-    component: () => import("../views/BatchTest.vue"),
-    meta: {
-      title: "批量测试中心",
-    },
-  },
 ];
 
 const router = createRouter({

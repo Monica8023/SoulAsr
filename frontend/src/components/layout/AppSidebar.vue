@@ -5,7 +5,7 @@
         <p class="brand-kicker">SoulASR</p>
         <h2>Test Console</h2>
         <p class="brand-copy">
-          本地语音识别性能与效果测试平台，聚焦资源监控、实时调试和批量验证。
+          本地语音识别性能与效果测试平台，聚焦资源监控、实时调试与流式识别链路验证。
         </p>
       </div>
 
@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { Cpu, DataLine, Microphone } from "@element-plus/icons-vue";
+import { DataLine, Microphone } from "@element-plus/icons-vue";
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 
@@ -51,7 +51,6 @@ const activePath = computed(() => route.path);
 const items = [
   { path: "/", label: "系统仪表盘", icon: DataLine },
   { path: "/workbench", label: "ASR 调试工作台", icon: Microphone },
-  { path: "/batch", label: "批量测试中心", icon: Cpu },
 ];
 </script>
 

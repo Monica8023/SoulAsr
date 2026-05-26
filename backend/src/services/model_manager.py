@@ -15,8 +15,8 @@ from backend.src.services.system_monitor import SystemMonitor
 def _default_model_registry() -> dict[str, ModelRuntimeConfig]:
     return {
         "paraformer": ModelRuntimeConfig(engine="paraformer", enabled=False),
-        "qwen3-asr": ModelRuntimeConfig(engine="qwen3-asr", enabled=False),
-        "zipformer": ModelRuntimeConfig(engine="zipformer", enabled=True),
+        "qwen3-asr": ModelRuntimeConfig(engine="qwen3-asr", enabled=True),
+        "zipformer": ModelRuntimeConfig(engine="zipformer", enabled=False),
         "whisper": ModelRuntimeConfig(engine="whisper", enabled=False),
         "funasr": ModelRuntimeConfig(engine="funasr", enabled=False),
     }
@@ -32,6 +32,11 @@ class ModelManager:
 
     def _load_registry(self) -> dict[str, ModelRuntimeConfig]:
         registry_path = Path(settings.model_registry_path)
+        if not registry_path.is_absolute() and not registry_path.exists():
+            project_root = Path(__file__).resolve().parents[3]
+            candidate = project_root / registry_path
+            if candidate.exists():
+                registry_path = candidate
         if registry_path.exists():
             raw = json.loads(registry_path.read_text(encoding="utf-8"))
             models = raw.get("models", raw)
@@ -39,6 +44,10 @@ class ModelManager:
                 model_name: ModelRuntimeConfig(**config)
                 for model_name, config in models.items()
             }
+        self.logger.warning(
+            "Model registry file not found, falling back to default registry. model_registry_path=%s",
+            settings.model_registry_path,
+        )
         return _default_model_registry()
 
     def refresh_registry(self):
@@ -141,13 +150,31 @@ class ModelManager:
     def ensure_default_model_loaded(self):
         for model_name, config in self._model_configs.items():
             if config.enabled and config.auto_load:
-                self.load_model(model_name)
+                try:
+                    self.load_model(model_name)
+                except Exception as exc:
+                    self.logger.error(
+                        "Auto-load failed; model will remain unavailable until fixed. "
+                        "model_name=%s engine=%s error=%s",
+                        model_name,
+                        config.engine,
+                        exc,
+                        exc_info=True,
+                    )
         if (
             settings.auto_load_default_model
             and settings.default_model in self._model_configs
             and self._model_configs[settings.default_model].enabled
         ):
-            self.load_model(settings.default_model)
+            try:
+                self.load_model(settings.default_model)
+            except Exception as exc:
+                self.logger.error(
+                    "Default model auto-load failed. default_model=%s error=%s",
+                    settings.default_model,
+                    exc,
+                    exc_info=True,
+                )
 
     def get_engine(self, model_name: str | None = None):
         target_name = model_name or settings.default_model

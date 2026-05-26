@@ -1,5 +1,9 @@
+import os
+from pathlib import Path
+
 import numpy as np
 
+from backend.src.core.config import settings
 from backend.src.core.logging_config import get_logger
 from backend.src.engines.base_engine import BaseEngine
 
@@ -9,13 +13,32 @@ logger = get_logger(__name__)
 class ZipformerEngine(BaseEngine):
     engine_name = "zipformer"
 
+    def _prepare_dll_search_path(self) -> None:
+        dll_dir = (
+            self.runtime_options.get("onnxruntime_dll_dir")
+            or settings.onnxruntime_dll_dir
+        )
+        if not dll_dir or os.name != "nt":
+            return
+
+        dll_path = Path(str(dll_dir))
+        if not dll_path.exists() or not dll_path.is_dir():
+            raise RuntimeError(
+                f"Configured ONNXRUNTIME DLL directory does not exist: {dll_dir}"
+            )
+
+        os.add_dll_directory(str(dll_path))
+        logger.info("Added ONNX Runtime DLL directory: %s", dll_path)
+
     def _load_model(self):
+        self._prepare_dll_search_path()
         try:
             import sherpa_onnx
         except ImportError as exc:
             raise RuntimeError(
                 "Failed to import sherpa_onnx. This is usually caused by an incompatible "
-                "Windows wheel/DLL architecture or missing runtime dependency."
+                "Windows wheel/DLL architecture or an incompatible onnxruntime.dll "
+                "being resolved from PATH. Configure ONNXRUNTIME_DLL_DIR if needed."
             ) from exc
 
         cfg = self.runtime_options
@@ -27,7 +50,7 @@ class ZipformerEngine(BaseEngine):
         num_threads = cfg.get("num_threads", cfg.get("asr_num_threads", 2))
         feature_dim = cfg.get("feature_dim", cfg.get("asr_feature_dim", 80))
         sample_rate = cfg.get("sample_rate", cfg.get("asr_sample_rate", 16000))
-        provider = cfg.get("provider", cfg.get("asr_provider", "cuda"))
+        provider = str(self.device)
         decoding_method = cfg.get("decoding_method")
         hotwords_file = cfg.get("hotwords_file")
         hotwords_score = cfg.get("hotwords_score")

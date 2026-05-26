@@ -4,7 +4,7 @@
       <div>
         <h2>ASR 实时调试工作台</h2>
         <p>
-          实时识别已切换为浏览器麦克风 PCM 推流模式。上传文件仅用于波形预览和离线调试辅助，不再作为实时流输入源。
+          实时测试固定使用浏览器麦克风 PCM 推流，通过 WebSocket 持续发送到后端，不再提供本地音频文件上传识别。
         </p>
       </div>
       <div class="lead-tags">
@@ -52,29 +52,6 @@
       </template>
 
       <div class="control-stack">
-        <el-upload
-          class="upload-panel"
-          drag
-          :auto-upload="false"
-          :show-file-list="false"
-          accept="audio/*"
-          :on-change="handleFileChange"
-        >
-          <el-icon class="upload-icon"><UploadFilled /></el-icon>
-          <div class="el-upload__text">拖拽音频到此处，或 <em>点击选择文件</em></div>
-          <template #tip>
-            <div class="el-upload__tip">
-              {{
-                selectedFile
-                  ? `已选择：${selectedFile.name}，仅用于预览波形，不参与实时推流`
-                  : "支持常见桌面音频文件格式，仅用于预览波形"
-              }}
-            </div>
-          </template>
-        </el-upload>
-
-        <WaveformPlayer :file="selectedFile" :vad-segments="demoVadSegments" @ready="handleWaveReady" />
-
         <div class="stream-status-grid">
           <div class="status-card">
             <span>实时输入</span>
@@ -161,14 +138,12 @@
               />
             </el-form-item>
 
-            <el-form-item label="上传文件时长">
-              <div class="inline-note">
-                {{ selectedFile ? `${previewAudioDuration.toFixed(2)} s` : "未选择文件" }}
-              </div>
-            </el-form-item>
-
             <el-form-item label="推流模式">
               <div class="inline-note">浏览器麦克风实时采集，发送固定 16k 单声道 PCM</div>
+            </el-form-item>
+
+            <el-form-item label="数据链路">
+              <div class="inline-note">Microphone -> PCM16 / 16k Mono -> WebSocket -> VAD -> Streaming ASR</div>
             </el-form-item>
           </el-form>
         </div>
@@ -230,11 +205,9 @@
 </template>
 
 <script setup lang="ts">
-import { UploadFilled } from "@element-plus/icons-vue";
-import { ElMessage, type UploadFile } from "element-plus";
+import { ElMessage } from "element-plus";
 import { computed, onBeforeUnmount, reactive, ref, shallowRef } from "vue";
 
-import WaveformPlayer from "../components/WaveformPlayer.vue";
 import { useWebSocket } from "../composables/useWebSocket";
 import type { DebugFormState, SessionEndPayload, SessionStartPayload, TaskMetrics, TranscriptMessage } from "../types/asr";
 import type { MicrophoneChunkStats, MicrophonePcmStreamController } from "../utils/microphoneStream";
@@ -249,12 +222,11 @@ const form = reactive<DebugFormState>({
   chunkDurationMs: 60,
 });
 
-const selectedFile = ref<File | null>(null);
 const partialText = ref("");
 const finalSegments = ref<string[]>([]);
 const rawMessages = ref<string[]>([]);
 const errorLogs = ref<string[]>([]);
-const previewAudioDuration = ref(0);
+const sentenceDraft = ref("");
 const realtimeAudioSeconds = ref(0);
 const sentFrames = ref(0);
 const sentBytes = ref(0);
@@ -272,11 +244,6 @@ const metrics = reactive<TaskMetrics>({
   latencyMs: 0,
 });
 
-const demoVadSegments = ref([
-  { start: 0.4, end: 1.8 },
-  { start: 2.4, end: 4.1 },
-]);
-
 const socketUrl = computed(() => import.meta.env.VITE_ASR_WS_URL || "ws://localhost:8000/ws/asr");
 
 const parseHotwords = () =>
@@ -291,11 +258,36 @@ const appendVadEvent = (label: string) => {
   vadEventLogs.value = vadEventLogs.value.slice(0, 8);
 };
 
+const mergeSentenceText = (current: string, incoming: string) => {
+  const next = String(incoming || "");
+  if (!next) {
+    return current;
+  }
+  if (!current) {
+    return next;
+  }
+  if (next.startsWith(current)) {
+    return next;
+  }
+  if (current.endsWith(next)) {
+    return current;
+  }
+  return `${current}${next}`;
+};
+
+const splitTranscriptLines = (text: string) =>
+  String(text || "")
+    .replace(/\r\n/g, "\n")
+    .split(/(?<=[。！？!?；;])\s*|\n+/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+
 const resetOutputs = () => {
   partialText.value = "";
   finalSegments.value = [];
   rawMessages.value = [];
   errorLogs.value = [];
+  sentenceDraft.value = "";
   metrics.rtf = 0;
   metrics.firstTokenMs = 0;
   metrics.totalDurationMs = 0;
@@ -362,13 +354,16 @@ const handleSocketMessage = (event: MessageEvent<string | ArrayBuffer>) => {
   }
 
   if (message.type === "partial") {
-    partialText.value = message.text || "";
+    sentenceDraft.value = mergeSentenceText(sentenceDraft.value, message.text || "");
+    partialText.value = sentenceDraft.value;
   }
 
   if (message.type === "final") {
-    if (message.text) {
-      finalSegments.value.push(message.text);
+    sentenceDraft.value = mergeSentenceText(sentenceDraft.value, message.text || "");
+    if (sentenceDraft.value.trim()) {
+      finalSegments.value.push(...splitTranscriptLines(sentenceDraft.value));
     }
+    sentenceDraft.value = "";
     partialText.value = "";
     if (isSentenceFinal) {
       sentenceCount.value = sentenceIndex || sentenceCount.value;
@@ -452,17 +447,6 @@ const microphoneLabel = computed(() => {
 
 const rawMessagePreview = computed(() => rawMessages.value.join("\n\n") || "暂无原始报文");
 
-const handleFileChange = (uploadFile: UploadFile) => {
-  if (!uploadFile.raw) {
-    return;
-  }
-  selectedFile.value = uploadFile.raw;
-};
-
-const handleWaveReady = (duration: number) => {
-  previewAudioDuration.value = duration;
-};
-
 const startRecognition = async () => {
   if (streaming.value || microphoneState.value === "starting") {
     return;
@@ -479,7 +463,7 @@ const startRecognition = async () => {
 
     const startPayload: SessionStartPayload = {
       type: "start",
-      fileName: selectedFile.value?.name || "browser-microphone.pcm",
+      fileName: "browser-microphone.pcm",
       modelName: form.modelName,
       audioFormat: "pcm_s16le",
       sampleRate: 16000,
@@ -679,26 +663,6 @@ onBeforeUnmount(() => {
 .vad-event-empty {
   color: #64748b;
   font-family: var(--mono-font);
-}
-
-.upload-panel {
-  width: 100%;
-}
-
-:deep(.upload-panel .el-upload-dragger) {
-  width: 100%;
-  border-radius: 24px;
-  border-style: dashed;
-  border-color: rgba(0, 240, 255, 0.2);
-  background:
-    radial-gradient(circle at top, rgba(0, 240, 255, 0.12), transparent 34%),
-    linear-gradient(180deg, rgba(15, 23, 42, 0.56), rgba(30, 41, 59, 0.38));
-}
-
-.upload-icon {
-  font-size: 30px;
-  color: #00f0ff;
-  filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.28));
 }
 
 .param-grid {

@@ -10,27 +10,27 @@
     },
     "qwen3-asr": {
       "engine": "qwen3-asr",
-      "path": "D:/models/qwen3-asr",
-      "device": "auto",
-      "enabled": false,
-      "auto_load": false,
-      "options": {}
+      "path": "D:/model/qwen3-asr",
+      "device": "cpu",
+      "enabled": true,
+      "auto_load": true,
+      "options": {
+        "dtype": "bfloat16",
+        "max_inference_batch_size": 32,
+        "max_new_tokens": 256,
+        "qwen_min_decode_ms": 800
+      }
     },
     "zipformer": {
       "engine": "zipformer",
       "path": "D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30",
-      "device": "auto",
+      "device": "cpu",
       "enabled": true,
       "auto_load": true,
       "options": {
-        "encoder": "D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/encoder.int8.onnx",
-        "decoder": "D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/decoder.onnx",
-        "joiner": "D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/joiner.int8.onnx",
-        "tokens": "D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/tokens.txt",
         "num_threads": 2,
         "feature_dim": 80,
-        "sample_rate": 16000,
-        "provider": "cpu"
+        "sample_rate": 16000
       }
     },
     "whisper": {

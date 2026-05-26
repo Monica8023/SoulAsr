@@ -90,3 +90,723 @@ RuntimeError: Failed to import sherpa_onnx. This is usually caused by an incompa
 2026-05-22 09:01:40,365 INFO [uvicorn.error] Waiting for application shutdown.
 2026-05-22 09:01:40,367 INFO [uvicorn.error] Application shutdown complete.
 2026-05-22 09:01:40,368 INFO [uvicorn.error] Finished server process [37936]
+2026-05-22 14:42:34,510 INFO [backend.src.services.model_manager] Model registry refreshed. configured_models=['paraformer', 'qwen3-asr', 'zipformer', 'whisper', 'funasr'] enabled_models=['zipformer'] disabled_models=['paraformer', 'qwen3-asr', 'whisper', 'funasr'] discovered_engines=['funasr', 'paraformer', 'qwen3-asr', 'whisper', 'zipformer']
+2026-05-22 14:42:34,510 INFO [uvicorn.error] Application startup complete.
+2026-05-22 14:42:34,511 INFO [uvicorn.error] Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-05-22 14:42:40,063 INFO [uvicorn.error] 127.0.0.1:53495 - "WebSocket /api/v1/asr/stream" [accepted]
+2026-05-22 14:42:40,063 INFO [backend.src.services.asr_service] WebSocket streaming session accepted.
+2026-05-22 14:42:40,065 INFO [uvicorn.error] connection open
+2026-05-22 14:42:40,068 INFO [backend.src.services.asr_service] Streaming session started. model_name=zipformer file_name=browser-microphone.pcm audio_format=pcm_s16le sample_rate=16000 channels=1
+2026-05-22 14:42:40,069 INFO [backend.src.services.model_manager] Loading model. model_name=zipformer engine=zipformer path=None device=auto options={}
+2026-05-22 14:42:40,081 ERROR [backend.src.services.asr_service] Streaming session failed: Failed to import sherpa_onnx. This is usually caused by an incompatible Windows wheel/DLL architecture or missing runtime dependency.
+Traceback (most recent call last):
+  File "D:\PythonProject\SoulAsr\backend\src\engines\zipformer_engine.py", line 14, in _load_model
+    import sherpa_onnx
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\sherpa_onnx\__init__.py", line 1, in <module>
+    from sherpa_onnx.lib._sherpa_onnx import (
+ImportError: DLL load failed while importing _sherpa_onnx: %1 不是有效的 Win32 应用程序。
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\PythonProject\SoulAsr\backend\src\services\asr_service.py", line 78, in handle_streaming_session
+    engine = self.model_manager.get_engine(stream_config.model_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\src\services\model_manager.py", line 159, in get_engine
+    return self.load_model(target_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\src\services\model_manager.py", line 124, in load_model
+    engine.load()
+  File "D:\PythonProject\SoulAsr\backend\src\engines\base_engine.py", line 37, in load
+    self.model_handle = self._load_model()
+                        ^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\src\engines\zipformer_engine.py", line 16, in _load_model
+    raise RuntimeError(
+RuntimeError: Failed to import sherpa_onnx. This is usually caused by an incompatible Windows wheel/DLL architecture or missing runtime dependency.
+2026-05-22 14:42:40,087 INFO [uvicorn.error] connection closed
+2026-05-22 14:47:18,765 INFO [uvicorn.error] Shutting down
+2026-05-22 14:47:18,869 INFO [uvicorn.error] Waiting for application shutdown.
+2026-05-22 14:47:18,869 INFO [uvicorn.error] Application shutdown complete.
+2026-05-22 14:47:18,869 INFO [uvicorn.error] Finished server process [20192]
+2026-05-22 14:47:36,311 INFO [backend.src.services.model_manager] Model registry refreshed. configured_models=['paraformer', 'qwen3-asr', 'zipformer', 'whisper', 'funasr'] enabled_models=['zipformer'] disabled_models=['paraformer', 'qwen3-asr', 'whisper', 'funasr'] discovered_engines=['funasr', 'paraformer', 'qwen3-asr', 'whisper', 'zipformer']
+2026-05-22 14:47:36,311 INFO [uvicorn.error] Application startup complete.
+2026-05-22 14:47:36,312 INFO [uvicorn.error] Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-05-22 14:47:42,623 INFO [uvicorn.error] 127.0.0.1:53868 - "WebSocket /api/v1/asr/stream" [accepted]
+2026-05-22 14:47:42,623 INFO [backend.src.services.asr_service] WebSocket streaming session accepted.
+2026-05-22 14:47:42,624 INFO [uvicorn.error] connection open
+2026-05-22 14:47:42,627 INFO [backend.src.services.asr_service] Streaming session started. model_name=zipformer file_name=browser-microphone.pcm audio_format=pcm_s16le sample_rate=16000 channels=1
+2026-05-22 14:47:42,628 INFO [backend.src.services.model_manager] Loading model. model_name=zipformer engine=zipformer path=None device=auto options={}
+2026-05-22 14:47:42,635 ERROR [backend.src.services.asr_service] Streaming session failed: Failed to import sherpa_onnx. This is usually caused by an incompatible Windows wheel/DLL architecture or missing runtime dependency.
+Traceback (most recent call last):
+  File "D:\PythonProject\SoulAsr\backend\src\engines\zipformer_engine.py", line 14, in _load_model
+    import sherpa_onnx
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\sherpa_onnx\__init__.py", line 1, in <module>
+    from sherpa_onnx.lib._sherpa_onnx import (
+ImportError: DLL load failed while importing _sherpa_onnx: %1 不是有效的 Win32 应用程序。
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\PythonProject\SoulAsr\backend\src\services\asr_service.py", line 78, in handle_streaming_session
+    engine = self.model_manager.get_engine(stream_config.model_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\src\services\model_manager.py", line 159, in get_engine
+    return self.load_model(target_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\src\services\model_manager.py", line 124, in load_model
+    engine.load()
+  File "D:\PythonProject\SoulAsr\backend\src\engines\base_engine.py", line 37, in load
+    self.model_handle = self._load_model()
+                        ^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\src\engines\zipformer_engine.py", line 16, in _load_model
+    raise RuntimeError(
+RuntimeError: Failed to import sherpa_onnx. This is usually caused by an incompatible Windows wheel/DLL architecture or missing runtime dependency.
+2026-05-22 14:47:42,638 INFO [uvicorn.error] connection closed
+2026-05-22 14:47:48,644 INFO [uvicorn.error] Shutting down
+2026-05-22 14:47:48,751 INFO [uvicorn.error] Waiting for application shutdown.
+2026-05-22 14:47:48,752 INFO [uvicorn.error] Application shutdown complete.
+2026-05-22 14:47:48,752 INFO [uvicorn.error] Finished server process [19192]
+2026-05-22 15:01:59,525 INFO [backend.src.services.model_manager] Model registry refreshed. configured_models=['paraformer', 'qwen3-asr', 'zipformer', 'whisper', 'funasr'] enabled_models=['zipformer'] disabled_models=['paraformer', 'qwen3-asr', 'whisper', 'funasr'] discovered_engines=['funasr', 'paraformer', 'qwen3-asr', 'whisper', 'zipformer']
+2026-05-22 15:01:59,525 INFO [uvicorn.error] Application startup complete.
+2026-05-22 15:01:59,525 INFO [uvicorn.error] Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-05-22 15:02:03,867 INFO [uvicorn.error] 127.0.0.1:54758 - "WebSocket /api/v1/asr/stream" [accepted]
+2026-05-22 15:02:03,867 INFO [backend.src.services.asr_service] WebSocket streaming session accepted.
+2026-05-22 15:02:03,868 INFO [uvicorn.error] connection open
+2026-05-22 15:02:03,870 INFO [backend.src.services.asr_service] Streaming session started. model_name=zipformer file_name=browser-microphone.pcm audio_format=pcm_s16le sample_rate=16000 channels=1
+2026-05-22 15:02:03,871 INFO [backend.src.services.model_manager] Loading model. model_name=zipformer engine=zipformer path=None device=auto options={}
+2026-05-22 15:02:03,871 INFO [backend.src.engines.zipformer_engine] Added ONNX Runtime DLL directory: D:\PythonProject\SoulAsr\backend\vendor\onnxruntime
+2026-05-22 15:02:03,988 INFO [backend.src.engines.zipformer_engine] Loading Zipformer model=zipformer encoder=None/encoder.int8.onnx decoder=None/decoder.onnx joiner=None/joiner.int8.onnx tokens=None/tokens.txt num_threads=2 feature_dim=80 sample_rate=16000 provider=cuda
+2026-05-22 15:02:03,988 ERROR [backend.src.services.asr_service] Streaming session failed: None/tokens.txt does not exist
+Traceback (most recent call last):
+  File "D:\PythonProject\SoulAsr\backend\src\services\asr_service.py", line 78, in handle_streaming_session
+    engine = self.model_manager.get_engine(stream_config.model_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\src\services\model_manager.py", line 159, in get_engine
+    return self.load_model(target_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\src\services\model_manager.py", line 124, in load_model
+    engine.load()
+  File "D:\PythonProject\SoulAsr\backend\src\engines\base_engine.py", line 37, in load
+    self.model_handle = self._load_model()
+                        ^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\src\engines\zipformer_engine.py", line 95, in _load_model
+    recognizer = sherpa_onnx.OnlineRecognizer.from_transducer(**recognizer_kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\sherpa_onnx\online_recognizer.py", line 228, in from_transducer
+    _assert_file_exists(tokens)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\sherpa_onnx\online_recognizer.py", line 31, in _assert_file_exists
+    assert Path(f).is_file(), f"{f} does not exist"
+           ^^^^^^^^^^^^^^^^^
+AssertionError: None/tokens.txt does not exist
+2026-05-22 15:02:03,991 INFO [uvicorn.error] connection closed
+2026-05-22 15:13:15,860 INFO [uvicorn.error] Shutting down
+2026-05-22 15:13:15,972 INFO [uvicorn.error] Waiting for application shutdown.
+2026-05-22 15:13:15,973 INFO [uvicorn.error] Application shutdown complete.
+2026-05-22 15:13:15,974 INFO [uvicorn.error] Finished server process [33532]
+2026-05-22 15:13:23,006 INFO [backend.src.services.model_manager] Model registry refreshed. configured_models=['paraformer', 'qwen3-asr', 'zipformer', 'whisper', 'funasr'] enabled_models=['zipformer'] disabled_models=['paraformer', 'qwen3-asr', 'whisper', 'funasr'] discovered_engines=['funasr', 'paraformer', 'qwen3-asr', 'whisper', 'zipformer']
+2026-05-22 15:13:23,006 INFO [backend.src.services.model_manager] Loading model. model_name=zipformer engine=zipformer path=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30 device=auto options={'num_threads': 2, 'feature_dim': 80, 'sample_rate': 16000, 'provider': 'cpu'}
+2026-05-22 15:13:23,006 INFO [backend.src.engines.zipformer_engine] Added ONNX Runtime DLL directory: D:\PythonProject\SoulAsr\backend\vendor\onnxruntime
+2026-05-22 15:13:23,019 INFO [backend.src.engines.zipformer_engine] Loading Zipformer model=zipformer encoder=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/encoder.int8.onnx decoder=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/decoder.onnx joiner=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/joiner.int8.onnx tokens=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/tokens.txt num_threads=2 feature_dim=80 sample_rate=16000 provider=cpu
+2026-05-22 15:20:32,556 INFO [backend.src.services.model_manager] Model registry refreshed. configured_models=['paraformer', 'qwen3-asr', 'zipformer', 'whisper', 'funasr'] enabled_models=['zipformer'] disabled_models=['paraformer', 'qwen3-asr', 'whisper', 'funasr'] discovered_engines=['funasr', 'paraformer', 'qwen3-asr', 'whisper', 'zipformer']
+2026-05-22 15:20:32,556 INFO [backend.src.services.model_manager] Loading model. model_name=zipformer engine=zipformer path=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30 device=auto options={'num_threads': 2, 'feature_dim': 80, 'sample_rate': 16000, 'provider': 'cpu'}
+2026-05-22 15:20:32,557 INFO [backend.src.engines.zipformer_engine] Added ONNX Runtime DLL directory: D:\PythonProject\SoulAsr\backend\vendor\onnxruntime
+2026-05-22 15:20:32,573 INFO [backend.src.engines.zipformer_engine] Loading Zipformer model=zipformer encoder=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/encoder.int8.onnx decoder=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/decoder.onnx joiner=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/joiner.int8.onnx tokens=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/tokens.txt num_threads=2 feature_dim=80 sample_rate=16000 provider=cpu
+2026-05-22 15:20:37,490 INFO [backend.src.engines.zipformer_engine] Zipformer model loaded.
+2026-05-22 15:20:37,490 INFO [backend.src.services.model_manager] Model loaded. model_name=zipformer engine=zipformer
+2026-05-22 15:20:37,490 INFO [uvicorn.error] Application startup complete.
+2026-05-22 15:20:37,491 INFO [uvicorn.error] Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-05-22 15:20:54,487 INFO [uvicorn.error] 127.0.0.1:50436 - "WebSocket /api/v1/asr/stream" [accepted]
+2026-05-22 15:20:54,488 INFO [backend.src.services.asr_service] WebSocket streaming session accepted.
+2026-05-22 15:20:54,489 INFO [uvicorn.error] connection open
+2026-05-22 15:20:54,493 INFO [backend.src.services.asr_service] Streaming session started. model_name=zipformer file_name=browser-microphone.pcm audio_format=pcm_s16le sample_rate=16000 channels=1
+2026-05-22 15:20:54,495 INFO [backend.src.services.vad_service] VAD session created. provider=NoopVadProvider
+2026-05-22 15:21:41,693 INFO [backend.src.services.asr_service] WebSocket streaming session disconnected by client.
+2026-05-22 15:21:41,694 ERROR [uvicorn.error] Exception in ASGI application
+Traceback (most recent call last):
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\uvicorn\protocols\websockets\websockets_impl.py", line 239, in run_asgi
+    result = await self.app(self.scope, self.asgi_receive, self.asgi_send)  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 56, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\applications.py", line 1159, in __call__
+    await super().__call__(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\middleware\errors.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\routing.py", line 350, in handle
+    await self.app(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\routing.py", line 160, in app
+    await wrap_app_handling_exceptions(app, session)(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\routing.py", line 157, in app
+    await func(session)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\routing.py", line 764, in app
+    await dependant.call(**solved_result.values)
+  File "D:\PythonProject\SoulAsr\backend\src\api\v1\asr.py", line 18, in stream_transcribe
+    await service.handle_streaming_session(websocket)
+  File "D:\PythonProject\SoulAsr\backend\src\services\asr_service.py", line 167, in handle_streaming_session
+    await websocket.close()
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\websockets.py", line 181, in close
+    await self.send({"type": "websocket.close", "code": code, "reason": reason or ""})
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\websockets.py", line 98, in send
+    raise RuntimeError('Cannot call "send" once a close message has been sent.')
+RuntimeError: Cannot call "send" once a close message has been sent.
+2026-05-22 15:21:41,703 INFO [uvicorn.error] connection closed
+2026-05-22 15:27:35,815 INFO [uvicorn.error] Shutting down
+2026-05-22 15:27:35,924 INFO [uvicorn.error] Waiting for application shutdown.
+2026-05-22 15:27:35,925 INFO [backend.src.services.model_manager] Unloading model. model_name=zipformer
+2026-05-22 15:27:35,926 INFO [backend.src.engines.zipformer_engine] Unloading Zipformer model=zipformer
+2026-05-22 15:27:35,973 INFO [backend.src.services.model_manager] Model unloaded. model_name=zipformer
+2026-05-22 15:27:35,973 INFO [uvicorn.error] Application shutdown complete.
+2026-05-22 15:27:35,973 INFO [uvicorn.error] Finished server process [47748]
+2026-05-22 15:27:43,372 INFO [backend.src.services.model_manager] Model registry refreshed. configured_models=['paraformer', 'qwen3-asr', 'zipformer', 'whisper', 'funasr'] enabled_models=['zipformer'] disabled_models=['paraformer', 'qwen3-asr', 'whisper', 'funasr'] discovered_engines=['funasr', 'paraformer', 'qwen3-asr', 'whisper', 'zipformer']
+2026-05-22 15:27:43,372 INFO [backend.src.services.model_manager] Loading model. model_name=zipformer engine=zipformer path=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30 device=auto options={'num_threads': 2, 'feature_dim': 80, 'sample_rate': 16000, 'provider': 'cpu'}
+2026-05-22 15:27:43,372 INFO [backend.src.engines.zipformer_engine] Added ONNX Runtime DLL directory: D:\PythonProject\SoulAsr\backend\vendor\onnxruntime
+2026-05-22 15:27:43,386 INFO [backend.src.engines.zipformer_engine] Loading Zipformer model=zipformer encoder=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/encoder.int8.onnx decoder=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/decoder.onnx joiner=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/joiner.int8.onnx tokens=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/tokens.txt num_threads=2 feature_dim=80 sample_rate=16000 provider=cpu
+2026-05-22 15:27:48,238 INFO [backend.src.engines.zipformer_engine] Zipformer model loaded.
+2026-05-22 15:27:48,239 INFO [backend.src.services.model_manager] Model loaded. model_name=zipformer engine=zipformer
+2026-05-22 15:27:48,239 INFO [uvicorn.error] Application startup complete.
+2026-05-22 15:27:48,240 INFO [uvicorn.error] Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-05-22 15:28:00,341 INFO [uvicorn.error] 127.0.0.1:51019 - "WebSocket /api/v1/asr/stream" [accepted]
+2026-05-22 15:28:00,342 INFO [backend.src.services.asr_service] WebSocket streaming session accepted.
+2026-05-22 15:28:00,342 INFO [uvicorn.error] connection open
+2026-05-22 15:28:00,346 INFO [backend.src.services.asr_service] Streaming session started. model_name=zipformer file_name=browser-microphone.pcm audio_format=pcm_s16le sample_rate=16000 channels=1
+2026-05-22 15:28:00,347 INFO [backend.src.services.vad_service] VAD session created. provider=NoopVadProvider
+2026-05-22 15:28:26,169 INFO [backend.src.services.asr_service] WebSocket streaming session disconnected by client.
+2026-05-22 15:28:26,169 ERROR [uvicorn.error] Exception in ASGI application
+Traceback (most recent call last):
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\uvicorn\protocols\websockets\websockets_impl.py", line 239, in run_asgi
+    result = await self.app(self.scope, self.asgi_receive, self.asgi_send)  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 56, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\applications.py", line 1159, in __call__
+    await super().__call__(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\middleware\errors.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\routing.py", line 350, in handle
+    await self.app(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\routing.py", line 160, in app
+    await wrap_app_handling_exceptions(app, session)(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\routing.py", line 157, in app
+    await func(session)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\routing.py", line 764, in app
+    await dependant.call(**solved_result.values)
+  File "D:\PythonProject\SoulAsr\backend\src\api\v1\asr.py", line 18, in stream_transcribe
+    await service.handle_streaming_session(websocket)
+  File "D:\PythonProject\SoulAsr\backend\src\services\asr_service.py", line 174, in handle_streaming_session
+    await websocket.close()
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\websockets.py", line 181, in close
+    await self.send({"type": "websocket.close", "code": code, "reason": reason or ""})
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\websockets.py", line 98, in send
+    raise RuntimeError('Cannot call "send" once a close message has been sent.')
+RuntimeError: Cannot call "send" once a close message has been sent.
+2026-05-22 15:28:26,179 INFO [uvicorn.error] connection closed
+2026-05-22 15:48:50,802 INFO [uvicorn.error] Shutting down
+2026-05-22 15:48:50,908 INFO [uvicorn.error] Waiting for application shutdown.
+2026-05-22 15:48:50,909 INFO [backend.src.services.model_manager] Unloading model. model_name=zipformer
+2026-05-22 15:48:50,909 INFO [backend.src.engines.zipformer_engine] Unloading Zipformer model=zipformer
+2026-05-22 15:48:50,965 INFO [backend.src.services.model_manager] Model unloaded. model_name=zipformer
+2026-05-22 15:48:50,965 INFO [uvicorn.error] Application shutdown complete.
+2026-05-22 15:48:50,965 INFO [uvicorn.error] Finished server process [21140]
+2026-05-22 15:52:31,355 INFO [backend.src.services.model_manager] Model registry refreshed. configured_models=['paraformer', 'qwen3-asr', 'zipformer', 'whisper', 'funasr'] enabled_models=['qwen3-asr', 'zipformer'] disabled_models=['paraformer', 'whisper', 'funasr'] discovered_engines=['funasr', 'paraformer', 'qwen3-asr', 'whisper', 'zipformer']
+2026-05-22 15:52:31,356 INFO [backend.src.services.model_manager] Loading model. model_name=qwen3-asr engine=qwen3-asr path=D:/model/qwen3-asr device=cpu options={'dtype': 'bfloat16', 'max_inference_batch_size': 32, 'max_new_tokens': 256, 'qwen_min_decode_ms': 240}
+2026-05-22 15:52:31,360 ERROR [uvicorn.error] Traceback (most recent call last):
+  File "D:\PythonProject\SoulAsr\backend\src\engines\qwen3_asr_engine.py", line 70, in _load_model
+    from qwen_asr import Qwen3ASRModel
+ModuleNotFoundError: No module named 'qwen_asr'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\routing.py", line 638, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\routing.py", line 216, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\routing.py", line 216, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\routing.py", line 216, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\src\main.py", line 19, in lifespan
+    model_manager.ensure_default_model_loaded()
+  File "D:\PythonProject\SoulAsr\backend\src\services\model_manager.py", line 153, in ensure_default_model_loaded
+    self.load_model(model_name)
+  File "D:\PythonProject\SoulAsr\backend\src\services\model_manager.py", line 133, in load_model
+    engine.load()
+  File "D:\PythonProject\SoulAsr\backend\src\engines\base_engine.py", line 37, in load
+    self.model_handle = self._load_model()
+                        ^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\src\engines\qwen3_asr_engine.py", line 72, in _load_model
+    raise RuntimeError(
+RuntimeError: Failed to import qwen_asr. Install the qwen-asr runtime package required by Qwen3-ASR.
+
+2026-05-22 15:52:31,360 ERROR [uvicorn.error] Application startup failed. Exiting.
+2026-05-22 16:00:34,241 INFO [backend.src.services.model_manager] Model registry refreshed. configured_models=['paraformer', 'qwen3-asr', 'zipformer', 'whisper', 'funasr'] enabled_models=['qwen3-asr', 'zipformer'] disabled_models=['paraformer', 'whisper', 'funasr'] discovered_engines=['funasr', 'paraformer', 'qwen3-asr', 'whisper', 'zipformer']
+2026-05-22 16:00:34,242 INFO [backend.src.services.model_manager] Loading model. model_name=qwen3-asr engine=qwen3-asr path=D:/model/qwen3-asr device=cpu options={'dtype': 'bfloat16', 'max_inference_batch_size': 32, 'max_new_tokens': 256, 'qwen_min_decode_ms': 240}
+2026-05-22 16:00:34,301 ERROR [uvicorn.error] Traceback (most recent call last):
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\transformers\utils\import_utils.py", line 2317, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\transformers\utils\import_utils.py", line 2347, in _get_module
+    raise e
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\transformers\utils\import_utils.py", line 2345, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\transformers\generation\utils.py", line 55, in <module>
+    from .candidate_generator import (
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\transformers\generation\candidate_generator.py", line 29, in <module>
+    from sklearn.metrics import roc_curve
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\sklearn\metrics\__init__.py", line 6, in <module>
+    from sklearn.metrics import cluster
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\sklearn\metrics\cluster\__init__.py", line 11, in <module>
+    from sklearn.metrics.cluster._bicluster import consensus_score
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\sklearn\metrics\cluster\_bicluster.py", line 7, in <module>
+    from sklearn.utils._param_validation import StrOptions, validate_params
+ModuleNotFoundError: No module named 'sklearn.utils'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\PythonProject\SoulAsr\backend\src\engines\qwen3_asr_engine.py", line 70, in _load_model
+    from qwen_asr import Qwen3ASRModel
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\qwen_asr\__init__.py", line 20, in <module>
+    from .inference.qwen3_asr import Qwen3ASRModel
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\qwen_asr\inference\qwen3_asr.py", line 21, in <module>
+    from qwen_asr.core.transformers_backend import (
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\qwen_asr\core\transformers_backend\__init__.py", line 17, in <module>
+    from .modeling_qwen3_asr import Qwen3ASRForConditionalGeneration
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\qwen_asr\core\transformers_backend\modeling_qwen3_asr.py", line 26, in <module>
+    from transformers.generation import GenerationMixin
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\transformers\utils\import_utils.py", line 2320, in __getattr__
+    raise ModuleNotFoundError(
+ModuleNotFoundError: Could not import module 'GenerationMixin'. Are this object's requirements defined correctly?
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\routing.py", line 638, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\routing.py", line 216, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\routing.py", line 216, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\routing.py", line 216, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\src\main.py", line 19, in lifespan
+    model_manager.ensure_default_model_loaded()
+  File "D:\PythonProject\SoulAsr\backend\src\services\model_manager.py", line 153, in ensure_default_model_loaded
+    self.load_model(model_name)
+  File "D:\PythonProject\SoulAsr\backend\src\services\model_manager.py", line 133, in load_model
+    engine.load()
+  File "D:\PythonProject\SoulAsr\backend\src\engines\base_engine.py", line 37, in load
+    self.model_handle = self._load_model()
+                        ^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\src\engines\qwen3_asr_engine.py", line 72, in _load_model
+    raise RuntimeError(
+RuntimeError: Failed to import qwen_asr. Install the qwen-asr runtime package required by Qwen3-ASR.
+
+2026-05-22 16:00:34,302 ERROR [uvicorn.error] Application startup failed. Exiting.
+2026-05-22 16:01:14,256 INFO [backend.src.services.model_manager] Model registry refreshed. configured_models=['paraformer', 'qwen3-asr', 'zipformer', 'whisper', 'funasr'] enabled_models=['qwen3-asr', 'zipformer'] disabled_models=['paraformer', 'whisper', 'funasr'] discovered_engines=['funasr', 'paraformer', 'qwen3-asr', 'whisper', 'zipformer']
+2026-05-22 16:01:14,256 INFO [backend.src.services.model_manager] Loading model. model_name=qwen3-asr engine=qwen3-asr path=D:/model/qwen3-asr device=cpu options={'dtype': 'bfloat16', 'max_inference_batch_size': 32, 'max_new_tokens': 256, 'qwen_min_decode_ms': 240}
+2026-05-22 16:01:14,274 ERROR [uvicorn.error] Traceback (most recent call last):
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\transformers\utils\import_utils.py", line 2317, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\transformers\utils\import_utils.py", line 2347, in _get_module
+    raise e
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\transformers\utils\import_utils.py", line 2345, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\transformers\generation\utils.py", line 55, in <module>
+    from .candidate_generator import (
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\transformers\generation\candidate_generator.py", line 29, in <module>
+    from sklearn.metrics import roc_curve
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\sklearn\metrics\__init__.py", line 6, in <module>
+    from sklearn.metrics import cluster
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\sklearn\metrics\cluster\__init__.py", line 11, in <module>
+    from sklearn.metrics.cluster._bicluster import consensus_score
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\sklearn\metrics\cluster\_bicluster.py", line 7, in <module>
+    from sklearn.utils._param_validation import StrOptions, validate_params
+ModuleNotFoundError: No module named 'sklearn.utils'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\PythonProject\SoulAsr\backend\src\engines\qwen3_asr_engine.py", line 70, in _load_model
+    from qwen_asr import Qwen3ASRModel
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\qwen_asr\__init__.py", line 20, in <module>
+    from .inference.qwen3_asr import Qwen3ASRModel
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\qwen_asr\inference\qwen3_asr.py", line 21, in <module>
+    from qwen_asr.core.transformers_backend import (
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\qwen_asr\core\transformers_backend\__init__.py", line 17, in <module>
+    from .modeling_qwen3_asr import Qwen3ASRForConditionalGeneration
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\qwen_asr\core\transformers_backend\modeling_qwen3_asr.py", line 26, in <module>
+    from transformers.generation import GenerationMixin
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\transformers\utils\import_utils.py", line 2320, in __getattr__
+    raise ModuleNotFoundError(
+ModuleNotFoundError: Could not import module 'GenerationMixin'. Are this object's requirements defined correctly?
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\routing.py", line 638, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\routing.py", line 216, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\routing.py", line 216, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\routing.py", line 216, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\src\main.py", line 19, in lifespan
+    model_manager.ensure_default_model_loaded()
+  File "D:\PythonProject\SoulAsr\backend\src\services\model_manager.py", line 153, in ensure_default_model_loaded
+    self.load_model(model_name)
+  File "D:\PythonProject\SoulAsr\backend\src\services\model_manager.py", line 133, in load_model
+    engine.load()
+  File "D:\PythonProject\SoulAsr\backend\src\engines\base_engine.py", line 37, in load
+    self.model_handle = self._load_model()
+                        ^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\src\engines\qwen3_asr_engine.py", line 72, in _load_model
+    raise RuntimeError(
+RuntimeError: Failed to import qwen_asr. Install the qwen-asr runtime package required by Qwen3-ASR.
+
+2026-05-22 16:01:14,274 ERROR [uvicorn.error] Application startup failed. Exiting.
+2026-05-22 17:29:30,424 INFO [backend.src.services.model_manager] Model registry refreshed. configured_models=['paraformer', 'qwen3-asr', 'zipformer', 'whisper', 'funasr'] enabled_models=['qwen3-asr', 'zipformer'] disabled_models=['paraformer', 'whisper', 'funasr'] discovered_engines=['funasr', 'paraformer', 'qwen3-asr', 'whisper', 'zipformer']
+2026-05-22 17:29:30,425 INFO [backend.src.services.model_manager] Loading model. model_name=qwen3-asr engine=qwen3-asr path=D:/model/qwen3-asr device=cpu options={'dtype': 'bfloat16', 'max_inference_batch_size': 32, 'max_new_tokens': 256, 'qwen_min_decode_ms': 240}
+2026-05-22 17:29:33,012 INFO [backend.src.engines.qwen3_asr_engine] Loading qwen3-asr model=qwen3-asr path=D:/model/qwen3-asr device_map=cpu dtype=bfloat16 max_inference_batch_size=32 max_new_tokens=256
+2026-05-22 17:29:33,909 INFO [backend.src.engines.qwen3_asr_engine] qwen3-asr model loaded.
+2026-05-22 17:29:33,909 INFO [backend.src.services.model_manager] Model loaded. model_name=qwen3-asr engine=qwen3-asr
+2026-05-22 17:29:33,909 INFO [backend.src.services.model_manager] Loading model. model_name=zipformer engine=zipformer path=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30 device=cpu options={'num_threads': 2, 'feature_dim': 80, 'sample_rate': 16000}
+2026-05-22 17:29:33,910 INFO [backend.src.engines.zipformer_engine] Added ONNX Runtime DLL directory: D:\PythonProject\SoulAsr\backend\vendor\onnxruntime
+2026-05-22 17:29:33,988 INFO [backend.src.engines.zipformer_engine] Loading Zipformer model=zipformer encoder=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/encoder.int8.onnx decoder=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/decoder.onnx joiner=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/joiner.int8.onnx tokens=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/tokens.txt num_threads=2 feature_dim=80 sample_rate=16000 provider=cpu
+2026-05-22 17:29:39,321 INFO [backend.src.engines.zipformer_engine] Zipformer model loaded.
+2026-05-22 17:29:39,321 INFO [backend.src.services.model_manager] Model loaded. model_name=zipformer engine=zipformer
+2026-05-22 17:29:39,321 INFO [uvicorn.error] Application startup complete.
+2026-05-22 17:29:39,322 INFO [uvicorn.error] Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-05-22 17:29:50,390 INFO [uvicorn.error] 127.0.0.1:61777 - "WebSocket /api/v1/asr/stream" [accepted]
+2026-05-22 17:29:50,390 INFO [backend.src.services.asr_service] WebSocket streaming session accepted.
+2026-05-22 17:29:50,391 INFO [uvicorn.error] connection open
+2026-05-22 17:29:50,401 INFO [backend.src.services.asr_service] Streaming session started. model_name=qwen3-asr file_name=browser-microphone.pcm audio_format=pcm_s16le sample_rate=16000 channels=1
+2026-05-22 17:29:50,401 INFO [backend.src.services.vad_service] VAD session created. provider=NoopVadProvider
+2026-05-22 17:30:42,827 INFO [uvicorn.error] Shutting down
+2026-05-22 17:30:50,466 INFO [uvicorn.error] Finished server process [31424]
+2026-05-22 17:30:50,474 ERROR [uvicorn.error] Traceback (most recent call last):
+  File "D:\Python\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\asyncio\base_events.py", line 673, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\windows_events.py", line 322, in run_forever
+    super().run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 640, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 1992, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    with self.capture_signals():
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\contextlib.py", line 144, in __exit__
+    next(self.gen)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\uvicorn\server.py", line 339, in capture_signals
+    signal.raise_signal(captured_signal)
+  File "D:\Python\Lib\asyncio\runners.py", line 157, in _on_sigint
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\routing.py", line 645, in lifespan
+    await receive()
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+2026-05-22 17:30:50,474 INFO [uvicorn.error] connection closed
+2026-05-22 17:30:50,475 ERROR [uvicorn.error] Exception in ASGI application
+Traceback (most recent call last):
+  File "D:\Python\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\asyncio\base_events.py", line 673, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\windows_events.py", line 322, in run_forever
+    super().run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 640, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 1992, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    with self.capture_signals():
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\contextlib.py", line 144, in __exit__
+    next(self.gen)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\uvicorn\server.py", line 339, in capture_signals
+    signal.raise_signal(captured_signal)
+  File "D:\Python\Lib\asyncio\runners.py", line 157, in _on_sigint
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\uvicorn\protocols\websockets\websockets_impl.py", line 239, in run_asgi
+    result = await self.app(self.scope, self.asgi_receive, self.asgi_send)  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 56, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\applications.py", line 1159, in __call__
+    await super().__call__(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\middleware\errors.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\routing.py", line 350, in handle
+    await self.app(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\routing.py", line 160, in app
+    await wrap_app_handling_exceptions(app, session)(scope, receive, send)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\routing.py", line 157, in app
+    await func(session)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\fastapi\routing.py", line 764, in app
+    await dependant.call(**solved_result.values)
+  File "D:\PythonProject\SoulAsr\backend\src\api\v1\asr.py", line 18, in stream_transcribe
+    await service.handle_streaming_session(websocket)
+  File "D:\PythonProject\SoulAsr\backend\src\services\asr_service.py", line 130, in handle_streaming_session
+    await self._safe_send_json(
+  File "D:\PythonProject\SoulAsr\backend\src\services\asr_service.py", line 267, in _safe_send_json
+    await websocket.send_json(payload)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\websockets.py", line 176, in send_json
+    await self.send({"type": "websocket.send", "text": text})
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\websockets.py", line 86, in send
+    await self._send(message)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 39, in sender
+    await send(message)
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\uvicorn\protocols\websockets\websockets_impl.py", line 317, in asgi_send
+    await self.send(data)  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\websockets\legacy\protocol.py", line 618, in send
+    await self.ensure_open()
+  File "D:\PythonProject\SoulAsr\backend\.venv\Lib\site-packages\websockets\legacy\protocol.py", line 924, in ensure_open
+    await asyncio.shield(self.close_connection_task)
+asyncio.exceptions.CancelledError
+2026-05-22 17:37:21,178 INFO [backend.src.services.model_manager] Model registry refreshed. configured_models=['paraformer', 'qwen3-asr', 'zipformer', 'whisper', 'funasr'] enabled_models=['qwen3-asr', 'zipformer'] disabled_models=['paraformer', 'whisper', 'funasr'] discovered_engines=['funasr', 'paraformer', 'qwen3-asr', 'whisper', 'zipformer']
+2026-05-22 17:37:21,179 INFO [backend.src.services.model_manager] Loading model. model_name=qwen3-asr engine=qwen3-asr path=D:/model/qwen3-asr device=cpu options={'dtype': 'bfloat16', 'max_inference_batch_size': 32, 'max_new_tokens': 256, 'qwen_min_decode_ms': 600}
+2026-05-22 17:37:24,163 INFO [backend.src.engines.qwen3_asr_engine] Loading qwen3-asr model=qwen3-asr path=D:/model/qwen3-asr device_map=cpu dtype=bfloat16 max_inference_batch_size=32 max_new_tokens=256
+2026-05-22 17:37:25,193 INFO [backend.src.engines.qwen3_asr_engine] qwen3-asr model loaded.
+2026-05-22 17:37:25,193 INFO [backend.src.services.model_manager] Model loaded. model_name=qwen3-asr engine=qwen3-asr
+2026-05-22 17:37:25,193 INFO [backend.src.services.model_manager] Loading model. model_name=zipformer engine=zipformer path=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30 device=cpu options={'num_threads': 2, 'feature_dim': 80, 'sample_rate': 16000}
+2026-05-22 17:37:25,193 INFO [backend.src.engines.zipformer_engine] Added ONNX Runtime DLL directory: D:\PythonProject\SoulAsr\backend\vendor\onnxruntime
+2026-05-22 17:37:25,212 INFO [backend.src.engines.zipformer_engine] Loading Zipformer model=zipformer encoder=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/encoder.int8.onnx decoder=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/decoder.onnx joiner=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/joiner.int8.onnx tokens=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/tokens.txt num_threads=2 feature_dim=80 sample_rate=16000 provider=cpu
+2026-05-22 17:37:32,344 INFO [backend.src.engines.zipformer_engine] Zipformer model loaded.
+2026-05-22 17:37:32,344 INFO [backend.src.services.model_manager] Model loaded. model_name=zipformer engine=zipformer
+2026-05-22 17:37:32,344 INFO [uvicorn.error] Application startup complete.
+2026-05-22 17:37:32,346 INFO [uvicorn.error] Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-05-22 17:37:42,313 INFO [uvicorn.error] 127.0.0.1:62260 - "WebSocket /api/v1/asr/stream" [accepted]
+2026-05-22 17:37:42,313 INFO [backend.src.services.asr_service] WebSocket streaming session accepted.
+2026-05-22 17:37:42,314 INFO [uvicorn.error] connection open
+2026-05-22 17:37:42,316 INFO [backend.src.services.asr_service] Streaming session started. model_name=qwen3-asr file_name=browser-microphone.pcm audio_format=pcm_s16le sample_rate=16000 channels=1
+2026-05-22 17:37:42,316 INFO [backend.src.services.vad_service] VAD session created. provider=StreamingVadProvider
+2026-05-22 17:38:48,020 INFO [backend.src.services.asr_service] Skip websocket send because connection is closing: 
+2026-05-22 17:38:48,044 INFO [uvicorn.error] connection closed
+2026-05-22 17:38:48,045 INFO [backend.src.services.asr_service] Skip websocket send because connection is closing: Cannot call "send" once a close message has been sent.
+2026-05-22 17:38:50,843 INFO [backend.src.services.asr_service] Skip websocket send because connection is closing: Cannot call "send" once a close message has been sent.
+2026-05-22 17:38:50,843 INFO [backend.src.services.asr_service] Skip websocket send because connection is closing: Cannot call "send" once a close message has been sent.
+2026-05-22 17:38:50,843 INFO [backend.src.services.asr_service] Streaming session finalized. model_name=qwen3-asr total_duration_ms=68527.09 audio_seconds=11.640000000000008 rtf=5.8872
+2026-05-22 17:38:50,844 INFO [backend.src.services.asr_service] Skip websocket close because connection is already closed: Cannot call "send" once a close message has been sent.
+2026-05-22 17:43:26,825 INFO [uvicorn.error] Shutting down
+2026-05-22 17:43:26,932 INFO [uvicorn.error] Waiting for application shutdown.
+2026-05-22 17:43:26,932 INFO [backend.src.services.model_manager] Unloading model. model_name=qwen3-asr
+2026-05-22 17:43:27,071 INFO [backend.src.services.model_manager] Model unloaded. model_name=qwen3-asr
+2026-05-22 17:43:27,071 INFO [backend.src.services.model_manager] Unloading model. model_name=zipformer
+2026-05-22 17:43:27,072 INFO [backend.src.engines.zipformer_engine] Unloading Zipformer model=zipformer
+2026-05-22 17:43:27,139 INFO [backend.src.services.model_manager] Model unloaded. model_name=zipformer
+2026-05-22 17:43:27,140 INFO [uvicorn.error] Application shutdown complete.
+2026-05-22 17:43:27,140 INFO [uvicorn.error] Finished server process [44364]
+2026-05-22 17:43:40,642 INFO [backend.src.services.model_manager] Model registry refreshed. configured_models=['paraformer', 'qwen3-asr', 'zipformer', 'whisper', 'funasr'] enabled_models=['qwen3-asr', 'zipformer'] disabled_models=['paraformer', 'whisper', 'funasr'] discovered_engines=['funasr', 'paraformer', 'qwen3-asr', 'whisper', 'zipformer']
+2026-05-22 17:43:40,643 INFO [backend.src.services.model_manager] Loading model. model_name=qwen3-asr engine=qwen3-asr path=D:/model/qwen3-asr device=cpu options={'dtype': 'bfloat16', 'max_inference_batch_size': 32, 'max_new_tokens': 256, 'qwen_min_decode_ms': 2000}
+2026-05-22 17:43:43,580 INFO [backend.src.engines.qwen3_asr_engine] Loading qwen3-asr model=qwen3-asr path=D:/model/qwen3-asr device_map=cpu dtype=bfloat16 max_inference_batch_size=32 max_new_tokens=256
+2026-05-22 17:43:44,562 INFO [backend.src.engines.qwen3_asr_engine] qwen3-asr model loaded.
+2026-05-22 17:43:44,562 INFO [backend.src.services.model_manager] Model loaded. model_name=qwen3-asr engine=qwen3-asr
+2026-05-22 17:43:44,562 INFO [backend.src.services.model_manager] Loading model. model_name=zipformer engine=zipformer path=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30 device=cpu options={'num_threads': 2, 'feature_dim': 80, 'sample_rate': 16000}
+2026-05-22 17:43:44,562 INFO [backend.src.engines.zipformer_engine] Added ONNX Runtime DLL directory: D:\PythonProject\SoulAsr\backend\vendor\onnxruntime
+2026-05-22 17:43:44,578 INFO [backend.src.engines.zipformer_engine] Loading Zipformer model=zipformer encoder=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/encoder.int8.onnx decoder=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/decoder.onnx joiner=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/joiner.int8.onnx tokens=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/tokens.txt num_threads=2 feature_dim=80 sample_rate=16000 provider=cpu
+2026-05-22 17:43:51,682 INFO [backend.src.engines.zipformer_engine] Zipformer model loaded.
+2026-05-22 17:43:51,682 INFO [backend.src.services.model_manager] Model loaded. model_name=zipformer engine=zipformer
+2026-05-22 17:43:51,682 INFO [uvicorn.error] Application startup complete.
+2026-05-22 17:43:51,684 INFO [uvicorn.error] Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-05-22 17:44:05,939 INFO [uvicorn.error] 127.0.0.1:63006 - "WebSocket /api/v1/asr/stream" [accepted]
+2026-05-22 17:44:05,940 INFO [backend.src.services.asr_service] WebSocket streaming session accepted.
+2026-05-22 17:44:05,942 INFO [uvicorn.error] connection open
+2026-05-22 17:44:05,947 INFO [backend.src.services.asr_service] Streaming session started. model_name=qwen3-asr file_name=browser-microphone.pcm audio_format=pcm_s16le sample_rate=16000 channels=1
+2026-05-22 17:44:05,947 INFO [backend.src.services.vad_service] VAD session created. provider=StreamingVadProvider
+2026-05-22 17:44:36,143 INFO [backend.src.services.asr_service] Skip websocket send because connection is closing: 
+2026-05-22 17:44:36,144 INFO [backend.src.services.asr_service] Streaming session finalized. model_name=qwen3-asr total_duration_ms=30195.35 audio_seconds=25.619999999999838 rtf=1.1786
+2026-05-22 17:44:36,144 INFO [backend.src.services.asr_service] Skip websocket close because connection is already closed: Cannot call "send" once a close message has been sent.
+2026-05-22 17:44:36,144 INFO [uvicorn.error] connection closed
+2026-05-22 17:44:40,079 INFO [uvicorn.error] Shutting down
+2026-05-22 17:44:40,191 INFO [uvicorn.error] Waiting for application shutdown.
+2026-05-22 17:44:40,191 INFO [backend.src.services.model_manager] Unloading model. model_name=qwen3-asr
+2026-05-22 17:44:40,316 INFO [backend.src.services.model_manager] Model unloaded. model_name=qwen3-asr
+2026-05-22 17:44:40,316 INFO [backend.src.services.model_manager] Unloading model. model_name=zipformer
+2026-05-22 17:44:40,316 INFO [backend.src.engines.zipformer_engine] Unloading Zipformer model=zipformer
+2026-05-22 17:44:40,375 INFO [backend.src.services.model_manager] Model unloaded. model_name=zipformer
+2026-05-22 17:44:40,375 INFO [uvicorn.error] Application shutdown complete.
+2026-05-22 17:44:40,375 INFO [uvicorn.error] Finished server process [38660]
+2026-05-22 17:44:52,448 INFO [backend.src.services.model_manager] Model registry refreshed. configured_models=['paraformer', 'qwen3-asr', 'zipformer', 'whisper', 'funasr'] enabled_models=['qwen3-asr', 'zipformer'] disabled_models=['paraformer', 'whisper', 'funasr'] discovered_engines=['funasr', 'paraformer', 'qwen3-asr', 'whisper', 'zipformer']
+2026-05-22 17:44:52,448 INFO [backend.src.services.model_manager] Loading model. model_name=qwen3-asr engine=qwen3-asr path=D:/model/qwen3-asr device=cpu options={'dtype': 'bfloat16', 'max_inference_batch_size': 32, 'max_new_tokens': 256, 'qwen_min_decode_ms': 800}
+2026-05-22 17:44:55,277 INFO [backend.src.engines.qwen3_asr_engine] Loading qwen3-asr model=qwen3-asr path=D:/model/qwen3-asr device_map=cpu dtype=bfloat16 max_inference_batch_size=32 max_new_tokens=256
+2026-05-22 17:44:56,227 INFO [backend.src.engines.qwen3_asr_engine] qwen3-asr model loaded.
+2026-05-22 17:44:56,227 INFO [backend.src.services.model_manager] Model loaded. model_name=qwen3-asr engine=qwen3-asr
+2026-05-22 17:44:56,227 INFO [backend.src.services.model_manager] Loading model. model_name=zipformer engine=zipformer path=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30 device=cpu options={'num_threads': 2, 'feature_dim': 80, 'sample_rate': 16000}
+2026-05-22 17:44:56,228 INFO [backend.src.engines.zipformer_engine] Added ONNX Runtime DLL directory: D:\PythonProject\SoulAsr\backend\vendor\onnxruntime
+2026-05-22 17:44:56,241 INFO [backend.src.engines.zipformer_engine] Loading Zipformer model=zipformer encoder=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/encoder.int8.onnx decoder=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/decoder.onnx joiner=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/joiner.int8.onnx tokens=D:/model/zipformer/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/tokens.txt num_threads=2 feature_dim=80 sample_rate=16000 provider=cpu
+2026-05-22 17:45:02,853 INFO [backend.src.engines.zipformer_engine] Zipformer model loaded.
+2026-05-22 17:45:02,853 INFO [backend.src.services.model_manager] Model loaded. model_name=zipformer engine=zipformer
+2026-05-22 17:45:02,853 INFO [uvicorn.error] Application startup complete.
+2026-05-22 17:45:02,855 INFO [uvicorn.error] Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-05-22 17:45:11,109 INFO [uvicorn.error] 127.0.0.1:63146 - "WebSocket /api/v1/asr/stream" [accepted]
+2026-05-22 17:45:11,109 INFO [backend.src.services.asr_service] WebSocket streaming session accepted.
+2026-05-22 17:45:11,110 INFO [uvicorn.error] connection open
+2026-05-22 17:45:11,112 INFO [backend.src.services.asr_service] Streaming session started. model_name=qwen3-asr file_name=browser-microphone.pcm audio_format=pcm_s16le sample_rate=16000 channels=1
+2026-05-22 17:45:11,113 INFO [backend.src.services.vad_service] VAD session created. provider=StreamingVadProvider
+2026-05-22 17:46:16,255 INFO [backend.src.services.asr_service] Skip websocket send because connection is closing: Unexpected ASGI message 'websocket.send', after sending 'websocket.close' or response already completed.
+2026-05-22 17:46:16,255 INFO [backend.src.services.asr_service] Streaming session finalized. model_name=qwen3-asr total_duration_ms=65141.76 audio_seconds=18.659999999999986 rtf=3.491
+2026-05-22 17:46:16,256 INFO [backend.src.services.asr_service] Skip websocket close because connection is already closed: Unexpected ASGI message 'websocket.close', after sending 'websocket.close' or response already completed.
+2026-05-22 17:46:16,256 INFO [uvicorn.error] connection closed
+2026-05-22 17:47:02,587 INFO [uvicorn.error] Shutting down
+2026-05-22 17:47:02,697 INFO [uvicorn.error] Waiting for application shutdown.
+2026-05-22 17:47:02,698 INFO [backend.src.services.model_manager] Unloading model. model_name=qwen3-asr
+2026-05-22 17:47:02,801 INFO [backend.src.services.model_manager] Model unloaded. model_name=qwen3-asr
+2026-05-22 17:47:02,802 INFO [backend.src.services.model_manager] Unloading model. model_name=zipformer
+2026-05-22 17:47:02,802 INFO [backend.src.engines.zipformer_engine] Unloading Zipformer model=zipformer
+2026-05-22 17:47:02,843 INFO [backend.src.services.model_manager] Model unloaded. model_name=zipformer
+2026-05-22 17:47:02,844 INFO [uvicorn.error] Application shutdown complete.
+2026-05-22 17:47:02,844 INFO [uvicorn.error] Finished server process [30872]

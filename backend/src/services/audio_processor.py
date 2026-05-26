@@ -3,7 +3,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
-from fastapi import UploadFile
 import librosa
 import numpy as np
 import soundfile as sf
@@ -48,17 +47,6 @@ class AudioProcessor:
             source_path=path,
             file_name=path.name,
             cleanup_paths=[],
-        )
-
-    async def persist_upload(self, upload: UploadFile) -> PreparedAudio:
-        suffix = Path(upload.filename or "upload.wav").suffix or ".wav"
-        target = unique_file_path(settings.temp_dir, suffix=suffix)
-        content = await upload.read()
-        Path(target).write_bytes(content)
-        return self._normalize_audio_file(
-            source_path=Path(target),
-            file_name=upload.filename or Path(target).name,
-            cleanup_paths=[target],
         )
 
     def persist_bytes(self, file_name: str, audio_bytes: bytes) -> PreparedAudio:

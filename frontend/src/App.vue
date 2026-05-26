@@ -6,7 +6,7 @@
         <div class="header-copy">
           <p class="app-kicker">Local ASR QA Console</p>
           <h1>{{ pageTitle }}</h1>
-          <p class="header-subtitle">Cyber-Tech Interface for streaming recognition, model ops, and batch diagnostics.</p>
+          <p class="header-subtitle">Cyber-Tech Interface for streaming recognition, model control, and realtime diagnostics.</p>
         </div>
         <el-tag effect="dark" round class="runtime-tag">Vue 3 + TypeScript</el-tag>
       </el-header>
